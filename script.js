@@ -1,11 +1,3 @@
-function getClockFaceRadius() {
-  const clock = document.querySelector('.clock');
-  clock.style.width = document.querySelector('#select').value;
-  clock.style.height = document.querySelector('#select').value;
-  return document.querySelector('#select').value / 2;
-}
-document.querySelector('#select').addEventListener('change', getClockFaceRadius);
-
 function createClockArrows() {
   const clock = document.querySelector('.clock');
   const center = document.createElement('div');
@@ -24,11 +16,9 @@ function createClockArrows() {
 createClockArrows();
 
 // Радиус циферблата
-const radius = getClockFaceRadius();
+const radius = (document.querySelector('.clock').offsetHeight / 2 + document.querySelector('.clock').offsetHeight / 2) / 2;
 
-// Координаты центра циферблата
-                          // const centerClockFacePositionX = document.querySelector('.center').offsetLeft + document.querySelector('.center').offsetWidth / 2;
-                          // const centerClockFacePositionY = document.querySelector('.center').offsetTop + document.querySelector('.center').offsetHeight / 2;
+// Координаты центра циферблата               
 const centerClockFacePositionX = document.querySelector('.center').offsetLeft;
 const centerClockFacePositionY = document.querySelector('.center').offsetTop;
 
@@ -36,13 +26,11 @@ const centerClockFacePositionY = document.querySelector('.center').offsetTop;
 function createClockFace() {
   let degrees = 150;
   for (let i = 1; i <= 12; i++) {
-    // Угол 30 градусов (1 час) в радианах
     const angleRadiansClockFace = parseFloat(degrees) / 180 * Math.PI;
     degrees -= 30;
     // Координаты центра цифры циферблата
     const centerDigitOfClockFaceX = centerClockFacePositionX + radius * 0.8 * Math.sin(angleRadiansClockFace);
     const centerDigitOfClockFaceY = centerClockFacePositionY + radius * 0.8 * Math.cos(angleRadiansClockFace);
-
     const hourDigit = document.createElement('div');
     hourDigit.textContent = i;
     hourDigit.className = 'hourDigit';
@@ -52,7 +40,6 @@ function createClockFace() {
   }
 }
 createClockFace();
-
 
 
 function showTimeDigitalClock() {
@@ -88,7 +75,6 @@ function showAnalogTime() {
   }, 1000);
 }
 showAnalogTime();
-
 
 function moveSecArrow(degree) {
   const secArrow = document.querySelector('.secArrow');
