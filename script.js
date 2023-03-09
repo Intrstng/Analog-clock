@@ -16,12 +16,13 @@ function createClockArrows() {
 createClockArrows();
 
 // Радиус циферблата
-const radius = (document.querySelector('.clock').offsetHeight / 2 + document.querySelector('.clock').offsetHeight / 2) / 2;
+const radius = (document.querySelector('.clock').offsetWidth) > (document.querySelector('.clock').offsetHeight)
+                ? (document.querySelector('.clock').offsetHeight / 2)
+                : (document.querySelector('.clock').offsetWidth / 2);
 
 // Координаты центра циферблата               
 const centerClockFacePositionX = document.querySelector('.center').offsetLeft;
 const centerClockFacePositionY = document.querySelector('.center').offsetTop;
-
 
 function createClockFace() {
   let degrees = 150;
@@ -40,7 +41,6 @@ function createClockFace() {
   }
 }
 createClockFace();
-
 
 function showTimeDigitalClock() {
   const date = new Date();
@@ -99,7 +99,7 @@ function moveHourArrow(degree) {
   const hourArrow = document.querySelector('.hourArrow');
   hourArrow.style.width = radius * 0.55 + 'px';
   hourArrow.style.left = Math.round(centerClockFacePositionY) + 'px';
-  hourArrow.style.top = Math.round(centerClockFacePositionX + 4) + 'px';
+  hourArrow.style.top = Math.round(centerClockFacePositionX + 1) + 'px';
   
   hourArrow.style.transform = `rotate(${(degree - 90)}deg)`; 
 }
