@@ -4,8 +4,15 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+  /* position: relative; */
 }
+#clock {
+  /* position: absolute;
+  top: 150px;
+  left: 150px; */
+}
+/*
 .clock {
   width: 400px;
   height: 400px;
@@ -67,4 +74,4 @@ body {
   color: rgb(86, 140, 4);
   font-size: 2rem;
   font-family: 'Digital-7', arial;
-}
+} */
