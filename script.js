@@ -1,5 +1,3 @@
-
-
 const svgNS = "http://www.w3.org/2000/svg";
 
 function createSvg() {
@@ -15,14 +13,12 @@ document.getElementById('clock').addEventListener('click', function(e) {
   console.log(e.clientX, e.clientY);
 })
 
-
 function drawSvgElements() {
   //Draw clock face
   function drawClockFace() {
     const svg = document.getElementById('clock');
     const w = svg.getAttributeNS(null, 'width');
     const h = svg.getAttributeNS(null, 'height');
-  
     const clockFace = document.createElementNS(svgNS, 'circle');
     clockFace.setAttributeNS(null, 'cx', w / 2);
     clockFace.setAttributeNS(null, 'cy', h / 2);
@@ -65,20 +61,50 @@ function drawSvgElements() {
       //Draw a digit inside of clock face digit circle
       const clockFaceDigitText = document.createElementNS(svgNS, 'text');
       svg.append(clockFaceDigitText);
+      const font = '"Lobster", cursive';
       clockFaceDigitText.setAttributeNS(null, 'x', clockFaceDigitCenterX);
-      clockFaceDigitText.setAttributeNS(null, 'y', parseInt(clockFaceDigitCenterY) + clockFaceDigitText.getBoundingClientRect().top / 2);
+      clockFaceDigitText.setAttributeNS(null, 'y', parseInt(clockFaceDigitCenterY) + clockFaceDigitText.getBoundingClientRect().top);
       clockFaceDigitText.setAttributeNS(null, 'fill', 'blue');
       clockFaceDigitText.setAttributeNS(null, 'text-anchor', 'middle');
       clockFaceDigitText.setAttributeNS(null, 'font-size', clockFaceDigitRadius);
+      clockFaceDigitText.setAttributeNS(null, 'font-family', font);
       clockFaceDigitText.textContent = i;
     }
   }
   createClockFace();
 
   function drawDigitalClock() {
+    //Draw digital clock
+    const svg = document.getElementById('clock');
+    const font = '"Press Start 2P", cursive';
+    const arrowsCenterX = svg.getBoundingClientRect().width / 2;
+    const arrowsCenterY = svg.getBoundingClientRect().height / 2;
+    const digitalClock = document.createElementNS(svgNS, 'text');
+    const radius = svg.getBoundingClientRect().width > svg.getBoundingClientRect().height
+                ? (svg.getBoundingClientRect().height / 2)
+                : (svg.getBoundingClientRect().width / 2);
+    digitalClock.setAttributeNS(null, 'fill', 'rgba(0, 132, 255, 09)');
+    digitalClock.setAttributeNS(null, 'text-anchor', 'middle');
+    digitalClock.setAttributeNS(null, 'font-size', radius / 10);
+    digitalClock.setAttributeNS(null, 'font-family', font);
+    svg.append(digitalClock);
+    digitalClock.setAttributeNS(null, 'x', arrowsCenterX);
+    digitalClock.setAttributeNS(null, 'y', parseInt(arrowsCenterY) - radius / 3.5);
 
+    function showTimeDigitalClock() {
+      const date = new Date();
+      const hour = date.getHours();
+      const min = date.getMinutes();
+      const sec = date.getSeconds();
+      const time = String(hour).padStart(2, 0) + ':' + String(min).padStart(2, 0) + ':' + String(sec).padStart(2, 0);
+      digitalClock.textContent = time;
+      setTimeout(() => {
+        showTimeDigitalClock();
+      }, 1000);
+    }
+    showTimeDigitalClock();
   }
-
+  drawDigitalClock()
 
 
   function drawClockArrows() {
@@ -146,17 +172,3 @@ function showAnalogTime() {
   
 }
 showAnalogTime()
-
-
-// function showTimeDigitalClock() {
-//   const date = new Date();
-//   const hour = date.getHours();
-//   const min = date.getMinutes();
-//   const sec = date.getSeconds();
-//   const time = document.querySelector('.digital-clock');
-//   time.textContent = String(hour).padStart(2, 0) + ':' + String(min).padStart(2, 0) + ':' + String(sec).padStart(2, 0);
-//   setTimeout(() => {
-//     showTimeDigitalClock();
-//   }, 1000);
-// }
-// showTimeDigitalClock();
