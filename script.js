@@ -85,7 +85,7 @@ function drawSvgElements() {
                 : (svg.getBoundingClientRect().width / 2);
     digitalClock.setAttributeNS(null, 'fill', 'rgba(0, 132, 255, 09)');
     digitalClock.setAttributeNS(null, 'text-anchor', 'middle');
-    digitalClock.setAttributeNS(null, 'font-size', radius / 10);
+    digitalClock.setAttributeNS(null, 'font-size', radius / 12);
     digitalClock.setAttributeNS(null, 'font-family', font);
     svg.append(digitalClock);
     digitalClock.setAttributeNS(null, 'x', arrowsCenterX);
